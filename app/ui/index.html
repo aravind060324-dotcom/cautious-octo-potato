@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bangalore Bites</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=cards-no-media-1">
+</head>
+<body>
+  <div class="hero-wash" aria-hidden="true"></div>
+
+  <header class="app-header">
+    <h1 class="brand">Bangalore Bites</h1>
+    <p class="tagline">Tell us what you want. We’ll rank real restaurants and explain why.</p>
+  </header>
+
+  <main class="app-shell">
+    <div class="layout">
+      <aside class="panel search-panel">
+        <div class="panel-heading">
+          <div class="panel-heading-main">
+            <span class="material-symbols-outlined accent-icon" aria-hidden="true">tune</span>
+            <h2>Refine your table</h2>
+          </div>
+          <span class="pill" id="filter-count">6 filters</span>
+        </div>
+
+        <form id="search-form" novalidate>
+          <div class="field">
+            <label for="location">Neighborhood</label>
+            <div class="control custom-select" data-searchable="true">
+              <span class="material-symbols-outlined control-icon" aria-hidden="true">location_on</span>
+              <select id="location" name="location" required>
+                <option value="">Select a neighborhood</option>
+              </select>
+            </div>
+            <p class="field-error" data-error-for="location"></p>
+          </div>
+
+          <div class="field">
+            <label for="budget">Budget</label>
+            <input type="hidden" id="budget" name="budget" value="">
+            <div class="budget-grid" role="group" aria-label="Budget for two">
+              <button type="button" class="budget-btn" data-budget="" aria-pressed="true">
+                Any<br><span class="budget-hint">No filter</span>
+              </button>
+              <button type="button" class="budget-btn" data-budget="low" aria-pressed="false">
+                Low<br><span class="budget-hint">≤ ₹500</span>
+              </button>
+              <button type="button" class="budget-btn" data-budget="medium" aria-pressed="false">
+                Medium<br><span class="budget-hint">₹501–₹1,000</span>
+              </button>
+              <button type="button" class="budget-btn" data-budget="high" aria-pressed="false">
+                High<br><span class="budget-hint">₹1,001+</span>
+              </button>
+            </div>
+            <p class="field-error" data-error-for="budget"></p>
+          </div>
+
+          <div class="field">
+            <label for="cuisine">Cuisine</label>
+            <div class="control suggest-field">
+              <span class="material-symbols-outlined control-icon" aria-hidden="true">restaurant</span>
+              <input id="cuisine" name="cuisine" type="text" autocomplete="off" placeholder="Italian, North Indian…" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="cuisine-menu">
+              <div id="cuisine-menu" class="select-menu suggest-menu" hidden role="listbox"></div>
+            </div>
+            <p class="field-error" data-error-for="cuisine"></p>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="min-rating">Minimum rating</label>
+              <div class="control">
+                <input id="min-rating" name="min_rating" type="number" min="0" max="5" step="0.1" inputmode="decimal" placeholder="Any">
+                <span class="material-symbols-outlined control-icon end" aria-hidden="true">star</span>
+              </div>
+              <p class="field-error" data-error-for="min_rating"></p>
+            </div>
+
+            <div class="field">
+              <label for="limit">How many</label>
+              <div class="control custom-select">
+                <select id="limit" name="limit" required>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5" selected>5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+              </div>
+              <p class="field-error" data-error-for="limit"></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="preferences">Extra wishes</label>
+            <div class="control textarea">
+              <textarea id="preferences" name="preferences" maxlength="500" rows="3" placeholder="family-friendly, quick service…"></textarea>
+            </div>
+            <p class="hint">For example, family-friendly or quick service.</p>
+            <p class="field-error" data-error-for="preferences"></p>
+          </div>
+
+          <p id="form-error" class="field-error form-error" role="alert"></p>
+
+          <button id="submit-button" class="primary-btn" type="submit">
+            <span class="material-symbols-outlined filled" aria-hidden="true">auto_awesome</span>
+            <span class="btn-label">Show recommendations</span>
+          </button>
+        </form>
+      </aside>
+
+      <section class="results-column">
+        <p id="status" class="status-banner" role="status" hidden></p>
+        <section id="results" class="results" aria-live="polite"></section>
+      </section>
+    </div>
+  </main>
+
+  <script src="/app.js?v=cards-no-media-1"></script>
+</body>
+</html>

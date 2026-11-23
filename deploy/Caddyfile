@@ -1,0 +1,13 @@
+# Local / single-host reverse proxy.
+# For public HTTPS, replace :80 with your domain (Caddy obtains certificates automatically).
+:80 {
+	encode gzip
+
+	handle /api/* {
+		reverse_proxy api:8000
+	}
+
+	handle {
+		reverse_proxy web:3000
+	}
+}

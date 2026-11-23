@@ -1,0 +1,20 @@
+.env
+.env.local
+web/.env.local
+APIKeys.txt
+.venv/
+__pycache__/
+.pytest_cache/
+# Keep processed catalog deployable; ignore raw download only.
+data/raw/
+# Ignore temp ingest artifacts, but allow restaurants.parquet
+data/processed/*.parquet.tmp
+data/processed/*.tmp
+.cache/
+huggingface/
+web/node_modules/
+web/.next/
+stitch_ui_extracted/
+.cursor/
+deploy/.env
+*.pyc

@@ -1,0 +1,8 @@
+# Railway API service: Python only (Next.js deploys separately on Vercel).
+providers = ["python"]
+
+[phases.setup]
+nixPkgs = ["python312"]
+
+[start]
+cmd = "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
