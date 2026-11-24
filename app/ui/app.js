@@ -361,9 +361,9 @@ function setupCuisineSuggest() {
 
 function renderCuisineSuggestions(query) {
   const needle = query.trim().toLowerCase();
-  const matches = cuisineNames
-    .filter((name) => !needle || name.toLowerCase().includes(needle))
-    .slice(0, 8);
+  const matches = cuisineNames.filter(
+    (name) => !needle || name.toLowerCase().includes(needle),
+  );
 
   cuisineMenu.replaceChildren();
   if (!matches.length) {

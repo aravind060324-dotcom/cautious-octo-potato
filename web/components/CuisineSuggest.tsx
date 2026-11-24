@@ -22,9 +22,9 @@ export function CuisineSuggest({
 
   const matches = useMemo(() => {
     const needle = value.trim().toLowerCase();
-    return suggestions
-      .filter((name) => !needle || name.toLowerCase().includes(needle))
-      .slice(0, 8);
+    return suggestions.filter(
+      (name) => !needle || name.toLowerCase().includes(needle),
+    );
   }, [suggestions, value]);
 
   useEffect(() => {

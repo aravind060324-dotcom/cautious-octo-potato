@@ -312,7 +312,7 @@ select {
   display: flex;
   flex-direction: column;
   max-height: 16rem;
-  overflow: hidden;
+  overflow: auto;
   background: var(--elevated);
   border: 1px solid rgba(232, 168, 73, 0.28);
   border-radius: var(--radius-sm);

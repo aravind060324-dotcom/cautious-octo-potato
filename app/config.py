@@ -52,6 +52,13 @@ class Settings(BaseSettings):
             return r"https://.*\.vercel\.app"
         return None
 
+    @field_validator("llm_base_url", "llm_api_key", "llm_model", mode="before")
+    @classmethod
+    def strip_llm_strings(cls, value: object) -> object:
+        if isinstance(value, str):
+            return value.strip()
+        return value
+
     @field_validator("catalog_path", mode="after")
     @classmethod
     def resolve_catalog_path(cls, value: Path) -> Path:
