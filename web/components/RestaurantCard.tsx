@@ -1,10 +1,12 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import type { RestaurantCard as Card } from "@/lib/types";
 import { FavoritesButton } from "./FavoritesButton";
 
 type Props = {
   card: Card;
+  enterIndex?: number;
   favorite: boolean;
   compared: boolean;
   compareDisabled?: boolean;
@@ -19,6 +21,7 @@ function formatRupees(amount: number) {
 
 export function RestaurantCard({
   card,
+  enterIndex,
   favorite,
   compared,
   compareDisabled,
@@ -28,10 +31,17 @@ export function RestaurantCard({
 }: Props) {
   const cuisineText = card.cuisines?.filter(Boolean).join(", ");
   const experienceText = card.rest_types?.filter(Boolean).join(", ");
+  const staggerMs =
+    typeof enterIndex === "number" ? `${enterIndex * 60}ms` : undefined;
 
   return (
     <article
-      className="card is-clickable"
+      className={`card is-clickable${staggerMs ? " card-enter" : ""}`}
+      style={
+        staggerMs
+          ? ({ ["--stagger" as string]: staggerMs } as CSSProperties)
+          : undefined
+      }
       role="button"
       tabIndex={0}
       onClick={onOpen}

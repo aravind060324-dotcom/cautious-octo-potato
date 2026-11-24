@@ -82,6 +82,7 @@ body {
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.02em;
+  animation: hero-rise 0.55s ease both;
 }
 
 .tagline {
@@ -90,6 +91,7 @@ body {
   color: var(--text-warm);
   font-size: 1rem;
   line-height: 1.6;
+  animation: hero-rise 0.55s ease 0.08s both;
 }
 
 .app-shell {
@@ -108,6 +110,10 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: var(--space-lg);
+}
+
+.search-panel {
+  animation: panel-settle 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
 }
 
 .panel-heading {
@@ -317,6 +323,8 @@ select {
   border: 1px solid rgba(232, 168, 73, 0.28);
   border-radius: var(--radius-sm);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  transform-origin: top center;
+  animation: menu-drop 0.18s ease both;
 }
 
 .select-menu[hidden] {
@@ -412,11 +420,19 @@ textarea {
   line-height: 1.3;
   text-align: center;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.12s ease;
 }
 
 .budget-btn:hover {
   background: var(--card-high);
+}
+
+.budget-btn:active {
+  transform: scale(0.96);
 }
 
 .budget-btn[aria-pressed="true"] {
@@ -518,6 +534,10 @@ textarea {
   display: none;
 }
 
+.status-banner.is-loading:not(.is-error) {
+  animation: status-pulse 1.2s ease-in-out infinite;
+}
+
 .status-banner.is-error {
   border-color: rgba(248, 113, 113, 0.35);
   color: var(--error-soft);
@@ -536,6 +556,7 @@ textarea {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: var(--space-lg);
+  animation: fade-in 0.35s ease both;
 }
 
 .summary-card::before {
@@ -621,6 +642,11 @@ textarea {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.card.card-enter {
+  animation: card-rise 0.42s ease both;
+  animation-delay: var(--stagger, 0ms);
 }
 
 .card:hover {
@@ -758,6 +784,7 @@ textarea {
   background: var(--card-low);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
+  animation: fade-in 0.4s ease both;
 }
 
 .empty-glyph {
@@ -837,5 +864,91 @@ textarea {
 
   .field-row {
     grid-template-columns: 1fr;
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes panel-settle {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menu-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand,
+  .tagline,
+  .search-panel,
+  .select-menu,
+  .summary-card,
+  .card.card-enter,
+  .empty-state,
+  .status-banner.is-loading:not(.is-error) {
+    animation: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .budget-btn:active,
+  .primary-btn:active:not(:disabled) {
+    transform: none;
   }
 }

@@ -205,7 +205,13 @@ export function HomeClient() {
 
       <section className="results-column">
         {status ? (
-          <p className={`status-banner${statusError ? " is-error" : ""}`}>
+          <p
+            className={`status-banner${statusError ? " is-error" : ""}${
+              !statusError && status === "Results are being prepared."
+                ? " is-loading"
+                : ""
+            }`}
+          >
             {status}
           </p>
         ) : null}

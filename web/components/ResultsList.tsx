@@ -80,10 +80,11 @@ export function ResultsList({
       ) : null}
 
       <div className="cards">
-        {cards.map((card) => (
+        {cards.map((card, index) => (
           <RestaurantCard
             key={card.id}
             card={card}
+            enterIndex={index}
             favorite={favoriteIds.has(card.id)}
             compared={compareIds.has(card.id)}
             compareDisabled={compareFull}

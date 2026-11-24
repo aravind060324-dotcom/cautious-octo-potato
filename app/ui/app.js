@@ -546,9 +546,12 @@ function renderResults(body) {
   const list = document.createElement("div");
   list.className = "cards";
   const ordered = cards.slice().sort((left, right) => left.rank - right.rank);
-  for (const card of ordered) {
-    list.append(renderCard(card));
-  }
+  ordered.forEach((card, index) => {
+    const article = renderCard(card);
+    article.classList.add("card-enter");
+    article.style.setProperty("--stagger", `${index * 60}ms`);
+    list.append(article);
+  });
   results.append(list);
 }
 
@@ -740,10 +743,11 @@ function showStatus(message, isError) {
   statusLine.hidden = false;
   statusLine.textContent = message;
   statusLine.classList.toggle("is-error", Boolean(isError));
+  statusLine.classList.toggle("is-loading", !isError && message === PREPARING);
 }
 
 function hideStatus() {
   statusLine.hidden = true;
   statusLine.textContent = "";
-  statusLine.classList.remove("is-error");
+  statusLine.classList.remove("is-error", "is-loading");
 }
